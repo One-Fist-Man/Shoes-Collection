@@ -7,13 +7,10 @@ const NavCartComponent = () => {
   const { AllCartProducts } = useProductsStore();
   return (
     <div className="border rounded-xl py-1 pr-1 flex flex-col justify-center items-center">
-      {" "}
-      {/* <div className=" "> */}
       <p className=" text-red-500  rounded-2xl leading-[14px]   font-bold">{AllCartProducts.length}</p>
       <div className="ml-2">
         <CartIcon />
       </div>
-      {/* </div> */}
     </div>
   );
 };
