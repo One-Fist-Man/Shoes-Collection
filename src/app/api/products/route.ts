@@ -1,4 +1,6 @@
-export const data = [
+import { NextResponse } from "next/server";
+
+const data = [
   {
     Id: "64ef87c93f02133c4986ccd2",
     Name: "School Smart Girl's School Shoe",
@@ -11,6 +13,7 @@ export const data = [
       OldPrice: 1290,
       Price: 1096,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef87d13f02133c4986cf0e",
@@ -24,6 +27,7 @@ export const data = [
       OldPrice: 1290,
       Price: 1096,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef87cc3f02133c4986cd9a",
@@ -37,6 +41,7 @@ export const data = [
       OldPrice: 690,
       Price: 586,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef87d43f02133c4986cfd9",
@@ -62,6 +67,7 @@ export const data = [
       OldPrice: 790,
       Price: 672,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef891f3f02133c4987245d",
@@ -75,6 +81,7 @@ export const data = [
       OldPrice: 1290,
       Price: 1096,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef892c3f02133c49872813",
@@ -88,6 +95,7 @@ export const data = [
       OldPrice: 1490,
       Price: 1266,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef89213f02133c49872528",
@@ -100,6 +108,7 @@ export const data = [
       OldPrice: 790,
       Price: 672,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef89293f02133c49872703",
@@ -113,6 +122,7 @@ export const data = [
       OldPrice: 1490,
       Price: 1266,
     },
+    availableQuantity: 10,
   },
   {
     Id: "657959ceb27b3528b4edea02",
@@ -126,6 +136,7 @@ export const data = [
       OldPrice: 1290,
       Price: 1096,
     },
+    availableQuantity: 10,
   },
   {
     Id: "65784d69d55413c8454c815b",
@@ -139,6 +150,7 @@ export const data = [
       OldPrice: 1490,
       Price: 1266,
     },
+    availableQuantity: 10,
   },
   {
     Id: "65783ef9d55413c84545c1ce",
@@ -152,6 +164,7 @@ export const data = [
       OldPrice: 790,
       Price: 672,
     },
+    availableQuantity: 10,
   },
   {
     Id: "657aa47b7c6b11d2419f9f70",
@@ -165,6 +178,7 @@ export const data = [
       OldPrice: 1490,
       Price: 1266,
     },
+    availableQuantity: 10,
   },
   {
     Id: "657ab8b57c6b11d241aa6239",
@@ -178,6 +192,7 @@ export const data = [
       OldPrice: 1490,
       Price: 1266,
     },
+    availableQuantity: 10,
   },
   {
     Id: "657abe207c6b11d241add3c4",
@@ -191,5 +206,10 @@ export const data = [
       OldPrice: 1490,
       Price: 1266,
     },
+    availableQuantity: 10,
   },
 ];
+
+export async function GET() {
+  return NextResponse.json({ data });
+}
