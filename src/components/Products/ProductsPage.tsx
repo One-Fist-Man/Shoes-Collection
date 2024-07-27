@@ -1,4 +1,3 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import CartList from "../Cart/CartList";
@@ -13,16 +12,26 @@ const ProductsPage = ({
   productsList: Product[];
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const { AllProducts, AllProductsToShow, setAllProducts, setAllProductsToShow } = useProductsStore();
+  const {
+    AllProducts,
+    AllProductsToShow,
+    setAllProducts,
+    setAllProductsToShow,
+  } = useProductsStore();
 
   useEffect(() => {
-    if (initialProducts) {
+    const storedProducts = JSON.parse(
+      localStorage.getItem("AllProducts") || "[]"
+    );
+    if (storedProducts.length > 0) {
+      setAllProducts(storedProducts);
+      setAllProductsToShow(storedProducts);
+    } else if (initialProducts) {
       setAllProducts(initialProducts);
       setAllProductsToShow(initialProducts);
     }
   }, [initialProducts, setAllProducts, setAllProductsToShow]);
 
-  // Use a custom hook to fetch products if needed
   const { data: productsData, error, isLoading } = useProducts(initialProducts);
 
   useEffect(() => {

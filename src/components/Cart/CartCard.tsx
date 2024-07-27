@@ -1,10 +1,17 @@
 "use client";
 import Image from "next/image";
+import React from "react";
 import { CartType, Product } from "@/types/product";
 import { useProductsStore } from "@/store/useStore";
 
 const CartCard = ({ cartData }: { cartData: CartType }) => {
-  const { AllCartProducts, AllProducts, setAllCartProducts, setAllProducts } = useProductsStore();
+  const { AllCartProducts, AllProducts, setAllCartProducts, setAllProducts } =
+    useProductsStore();
+
+  const updateLocalStorage = (cart: CartType[], products: Product[]) => {
+    localStorage.setItem("AllCartProducts", JSON.stringify(cart));
+    localStorage.setItem("AllProducts", JSON.stringify(products));
+  };
 
   const removeFromCart = (clickedCart: CartType) => {
     const updatedCart = AllCartProducts.filter(
@@ -14,18 +21,27 @@ const CartCard = ({ cartData }: { cartData: CartType }) => {
 
     const updatedProducts = AllProducts.map((item) =>
       item.Id === clickedCart.Id
-        ? { ...item, availableQuantity: item.availableQuantity + clickedCart.Cartadded }
+        ? {
+            ...item,
+            availableQuantity: item.availableQuantity + clickedCart.Cartadded,
+          }
         : item
     );
     setAllProducts(updatedProducts);
+    updateLocalStorage(updatedCart, updatedProducts);
   };
 
   const incrementQuantity = (clickedCart: CartType) => {
     const updatedCart = AllCartProducts.map((item) =>
       item.Id === clickedCart.Id && item.availableQuantity > 0
-        ? { ...item, Cartadded: item.Cartadded + 1, availableQuantity: item.availableQuantity - 1 }
+        ? {
+            ...item,
+            Cartadded: item.Cartadded + 1,
+            availableQuantity: item.availableQuantity - 1,
+          }
         : item
     );
+
     setAllCartProducts(updatedCart);
 
     const updatedProducts = AllProducts.map((item) =>
@@ -34,12 +50,17 @@ const CartCard = ({ cartData }: { cartData: CartType }) => {
         : item
     );
     setAllProducts(updatedProducts);
+    updateLocalStorage(updatedCart, updatedProducts);
   };
 
   const decrementQuantity = (clickedCart: CartType) => {
     const updatedCart = AllCartProducts.map((item) =>
       item.Id === clickedCart.Id && clickedCart.Cartadded > 0
-        ? { ...item, Cartadded: item.Cartadded - 1, availableQuantity: item.availableQuantity + 1 }
+        ? {
+            ...item,
+            Cartadded: item.Cartadded - 1,
+            availableQuantity: item.availableQuantity + 1,
+          }
         : item
     );
     setAllCartProducts(updatedCart);
@@ -50,6 +71,7 @@ const CartCard = ({ cartData }: { cartData: CartType }) => {
         : item
     );
     setAllProducts(updatedProducts);
+    updateLocalStorage(updatedCart, updatedProducts);
   };
 
   return (
@@ -69,13 +91,21 @@ const CartCard = ({ cartData }: { cartData: CartType }) => {
         </div>
 
         <div className="mr-2 flex items-center mt-2">
-          <div className="mr-2 text-lg font-medium tracking-wide text-[#808080]">Qty: </div>
+          <div className="mr-2 text-lg font-medium tracking-wide text-[#808080]">
+            Qty:{" "}
+          </div>
           <div className="flex h-8 w-full cursor-pointer items-center justify-between overflow-hidden rounded-[5px] border border-gray-400 text-xl">
-            <button className="active:scale-100 p-2" onClick={() => decrementQuantity(cartData)}>
+            <button
+              className="active:scale-100 p-2"
+              onClick={() => decrementQuantity(cartData)}
+            >
               -
             </button>
             <span className="text-lg">{cartData.Cartadded}</span>
-            <button className="active:scale-100 p-2" onClick={() => incrementQuantity(cartData)}>
+            <button
+              className="active:scale-100 p-2"
+              onClick={() => incrementQuantity(cartData)}
+            >
               +
             </button>
           </div>
