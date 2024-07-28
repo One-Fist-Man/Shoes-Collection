@@ -27,7 +27,7 @@ const data = [
       OldPrice: 1290,
       Price: 1096,
     },
-    availableQuantity: 10,
+    availableQuantity: 0,
   },
   {
     Id: "64ef87cc3f02133c4986cd9a",
@@ -54,6 +54,7 @@ const data = [
       OldPrice: 1290,
       Price: 1096,
     },
+    availableQuantity: 10,
   },
   {
     Id: "64ef891c3f02133c498723b6",
