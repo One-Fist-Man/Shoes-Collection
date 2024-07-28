@@ -12,8 +12,8 @@ interface LayoutProps {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Products Showcase App",
-  description: "A product listing app for showcaseing products",
+  title: "Shoes Collection",
+  description: "A shoes collection app for showcaseing shoes",
 };
 
 const RootLayout = ({ children }: LayoutProps) => {

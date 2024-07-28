@@ -8,15 +8,19 @@ const CartList = () => {
   const { AllCartProducts } = useProductsStore();
   return (
     <>
-      <div>
-        {AllCartProducts.map((cartData: CartType) => {
-          return (
-            <>
-              <CartCard cartData={cartData} />
-            </>
-          );
-        })}
-      </div>
+      {AllCartProducts.length === 0 ? (
+        <p className="text-center text-gray-500 ">Cart is empty</p>
+      ) : (
+        <div className="flex flex-col gap-4">
+          {AllCartProducts.map((cartData: CartType) => {
+            return (
+              <div key={cartData.Id}>
+                <CartCard cartData={cartData} />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };

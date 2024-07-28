@@ -1,10 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import CartList from "../Cart/CartList";
 import ProductsList from "./ProductsList";
 import { Product } from "@/types/product";
 import { useProducts } from "@/hooks/products";
 import { useProductsStore } from "@/store/useStore";
+import PageLoading from "../Loading/PageLoading";
+import { notFound } from "next/navigation";
 
 const ProductsPage = ({
   productsList: initialProducts,
@@ -41,20 +43,27 @@ const ProductsPage = ({
     setAllProductsToShow(filteredProducts);
   }, [searchQuery, AllProducts, setAllProductsToShow]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading products.</div>;
+  if (isLoading)
+    return (
+      <div className="text-center mt-20">
+        <PageLoading />{" "}
+      </div>
+    );
+  if (error) notFound();
 
   return (
-    <div className="flex flex-grow justify-between px-8 py-4">
-      <div className="w-[60%]">
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
         <input
           type="text"
-          placeholder="Search products..."
-          className="mb-4 p-1 border border-gray-300 rounded"
+          placeholder="Search Products Here..."
+          className="w-full p-2 border border-gray-300 rounded shadow-sm" //search section
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <div className="w-1/3 p-4">
+      </div>
+      <div className="flex flex-col md:flex-row gap-2 justify-between">
+        <div className="w-full md:w-3/5">
           <ProductsList
             products={
               AllProductsToShow.length === 0 && searchQuery.length === 0
@@ -63,14 +72,8 @@ const ProductsPage = ({
             }
           />
         </div>
-      </div>
-      <div className="bg-gray-100 p-4 w-[40%]">
-        <h2 className="text-xl font-bold mb-4">Cart</h2>
-        <div className="flex flex-col justify-between">
+        <div className="w-full md:w-2/5 mt-8 md:mt-0 md:ml-8 bg-gray-100 p-4 rounded shadow-sm">
           <CartList />
-          <div className="flex justify-between">
-            <p>Total:</p> <p>Tk 12,596.00</p>
-          </div>
         </div>
       </div>
     </div>

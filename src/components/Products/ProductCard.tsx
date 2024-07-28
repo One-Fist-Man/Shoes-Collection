@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import router from "next/router";
 import { Product } from "@/types/product";
 import { useProductsStore } from "@/store/useStore";
 
@@ -54,37 +53,46 @@ const ProductCard = ({ data }: { data: Product }) => {
   };
 
   return (
-    <div>
-      <Link
-        href={`/products/${data.Id}`}
-        // onClick={() => router.push(`/products/${data.Id}`)}
-        className="flex justify-center items-center"
-      >
-        <Image
-          src={data.FeaturedImageUrl}
-          alt=""
-          height={100}
-          width={100}
-        ></Image>
-      </Link>
-      <div className="bg-gray-100 p-4">
-        <h1>{data.Name}</h1>
-        <div className="flex">
-          <span className="text-gray-400 line-through">
-            {data.ProductPrice.OldPrice}
-          </span>
-          <span className="ml-2 whitespace-nowrap font-bold">
-            {data.ProductPrice.Price}
-          </span>
+    <div className="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 ">
+      <Link href={`/products/${data.Id}`}>
+        <div className="flex justify-center items-center p-4">
+          <Image
+            src={data.FeaturedImageUrl}
+            alt={data.Name}
+            height={200}
+            width={200}
+            className="object-cover"
+          />
         </div>
-        <p> availavble quantity {data.availableQuantity}</p>
-        <button
-          className="border p-1 text-sm"
-          onClick={() => (data.availableQuantity ? addToCartFunc(data) : "")}
-        >
-          add to cart
-        </button>
-      </div>
+        <div className="px-4 bg-gray-100">
+          <h1 className="text-lg font-bold text-center">{data.Name}</h1>
+          <div className="flex justify-center items-center mt-2">
+            <span className="text-gray-400 line-through">
+              ৳ {data.ProductPrice.OldPrice}
+            </span>
+            <span className="ml-2 text-xl font-bold text-gray-800">
+              ৳ {data.ProductPrice.Price}
+            </span>
+          </div>
+          <p className="mt-2 text-gray-600 text-center">
+            Available quantity:{" "}
+            <span className="font-semibold">
+              {data.availableQuantity ? data.availableQuantity : 0}
+            </span>
+          </p>
+        </div>
+      </Link>
+      <button
+        className={` w-full bg-blue-500 text-white p-2 rounded ${
+          data.availableQuantity
+            ? "hover:bg-blue-600"
+            : "opacity-50 cursor-not-allowed"
+        }`}
+        onClick={() => (data.availableQuantity ? addToCartFunc(data) : null)}
+        disabled={!data.availableQuantity}
+      >
+        Add to Cart
+      </button>
     </div>
   );
 };
