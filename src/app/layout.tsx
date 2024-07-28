@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../css/globals.css";
+import "../styles/globals.css";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Footer } from "@/components/Footer/Footer";
+import ReactQueryProvider from "@/components/ClientProviders/ReactQueryProvider";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,8 +12,8 @@ interface LayoutProps {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Products Showcase App",
-  description: "A product listing app for showcaseing products",
+  title: "Shoes Collection",
+  description: "A shoes collection app for showcaseing shoes",
 };
 
 const RootLayout = ({ children }: LayoutProps) => {
@@ -20,9 +21,11 @@ const RootLayout = ({ children }: LayoutProps) => {
     <>
       <html lang="en">
         <body className={`${inter.className} flex flex-col min-h-screen`}>
-          <Navbar />
-          {children}
-          <Footer />
+          <ReactQueryProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </ReactQueryProvider>
         </body>
       </html>
     </>

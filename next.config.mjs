@@ -9,6 +9,15 @@ const nextConfig = {
       },
     ];
   },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.apex4u.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
