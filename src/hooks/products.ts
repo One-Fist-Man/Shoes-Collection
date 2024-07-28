@@ -9,7 +9,7 @@ export const useProducts = (initialData:Product[]) => {
     queryKey: ['products'],
     queryFn: async () => {
       const productsData = await fetchProducts();
-      return productsData.data;
+      return productsData;
     },
     initialData,
     // enabled: true,

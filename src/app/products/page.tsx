@@ -7,7 +7,7 @@ import ProductsPage from "@/components/Products/ProductsPage";
 const Products: React.FC = async () => {
   const products = await fetchProducts();
 
-  return <ProductsPage productsList={products.data} />;
+  return <ProductsPage productsList={products} />;
 };
 
 export default Products;
