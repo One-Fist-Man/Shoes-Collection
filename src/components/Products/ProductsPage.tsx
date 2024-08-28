@@ -13,7 +13,7 @@ const ProductsPage = ({
 }: {
   productsList: Product[];
 }) => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");  
   const {
     AllProducts,
     AllProductsToShow,
@@ -62,9 +62,9 @@ const ProductsPage = ({
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
-      <div className="flex flex-col md:flex-row gap-2 justify-between">
+      <div className="flex flex-col md:flex-row gap-2 justify-between">  
         <div className="w-full md:w-3/5">
-          <ProductsList
+          <ProductsList   //products list section
             products={
               AllProductsToShow.length === 0 && searchQuery.length === 0
                 ? productsData
@@ -73,8 +73,8 @@ const ProductsPage = ({
           />
         </div>
         <div className="w-full md:w-2/5 mt-8 md:mt-0 md:ml-8 bg-gray-100 p-4 rounded shadow-sm">
-          <CartList />
-        </div>
+          <CartList />   
+        </div> 
       </div>
     </div>
   );
